@@ -71,18 +71,20 @@ class App extends React.Component {
     });
   }
 
-  handleExperienceDelete(id){
-    const a = this.state.details.filter(d => d.id!==id);
+  handleGeneralDelete(data,id){
+    const exper = this.state[data];
+    const a = exper.filter(d => d.id !== id);
     this.setState({
-      experience:a
+      [data]:a
     })
   }
 
   handleExtra(){
+    const details = this.state.extratext.split(',')
     const obj={
       id:uniqueId(),
       title:this.state.extratitle,
-      description:this.state.extratext
+      description:details
     }
     this.setState({
       extradetails:[obj,...this.state.extradetails]
@@ -119,7 +121,6 @@ class App extends React.Component {
             <button className='btn btn-primary btn-sm m-1' onClick={this.handleExtra}>Add Extra Details</button>
           </div>
           <div className="col">
-            <h6>Name and Contact</h6>
             <h5 className='text-capitalize text-muted'>{this.state.name} {this.state.surname}</h5>
             {this.state.details.map(data=>(
               <div key={data} className='d-inline'>
@@ -127,13 +128,27 @@ class App extends React.Component {
                 <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleDelete(data)}>X</button>
               </div>
             ))}
-            <h6>Experience</h6>
             {this.state.experience.map(data=>(
               <div key={data.id} className='d-inline'>
                 <p className='text-danger'>{data.name}(<span className='text-muted'>{data.duration}</span>)</p>
                 <p className='text-danger'>{data.role}</p>
                 <p className='text-danger'>{data.description}</p>
-                <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleExperienceDelete(data.id)}>Remove Experience</button>
+                <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleGeneralDelete('experience',data.id)}>Remove Experience</button>
+              </div>
+            ))}
+            {this.state.education.map(data=>(
+              <div key={data.id} className='d-inline'>
+                <p className='text-danger'>{data.name}(<span className='text-muted'>{data.score}</span>)</p>
+                <p className='text-danger'>{data.university}</p>
+                <p className='text-danger'>{data.standard}</p>
+                <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleGeneralDelete('education',data.id)}>Remove Education</button>
+              </div>
+            ))}
+            {this.state.extradetails.map(data=>(
+              <div key={data.id} className='d-inline'>
+                <p className='text-danger'>{data.title}</p>
+                {data.description.map(data => <button key={data} className='btn btn-sm btn-info'>{data}</button>)}
+                <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleGeneralDelete('extradetails',data.id)}>Remove {data.title}</button>
               </div>
             ))}
           </div>
