@@ -1,6 +1,8 @@
 import React from 'react';
 import {uniqueId} from 'lodash';
 
+import Input from './Input' ;
+
 import './styles.css'
 
 class App extends React.Component {
@@ -71,11 +73,11 @@ class App extends React.Component {
     });
   }
 
-  handleGeneralDelete(data,id){
-    const exper = this.state[data];
-    const a = exper.filter(d => d.id !== id);
+  handleGeneralDelete(name,id){
+    const datalist = this.state[name];
+    const a = datalist.filter(d => d.id !== id);
     this.setState({
-      [data]:a
+      [name]:a
     })
   }
 
@@ -104,26 +106,15 @@ class App extends React.Component {
           <div className="col">
             <input type="text" placeholder='name' name='name' value={this.state.name} onChange={this.handleChange}/>
             <input type="text" placeholder='surname' name='surname' value={this.state.surname} onChange={this.handleChange}/>
-            <input type="text" placeholder='contact' name='contact' value={this.state.contact} onChange={this.handleChange}/>
-            <button className='btn btn-primary btn-sm m-1' onClick={this.handleClick}>Add Contact</button>
-            <input type="text" placeholder='company' name='company' value={this.state.company} onChange={this.handleChange}/>
-            <input type="text" placeholder='duration' name='duration' value={this.state.duration} onChange={this.handleChange}/>
-            <input type="text" placeholder='role' name='role' value={this.state.role} onChange={this.handleChange}/>
-            <input type="text" placeholder='description' name='description' value={this.state.description} onChange={this.handleChange}/>
-            <button className='btn btn-primary btn-sm m-1' onClick={this.handleExperience}>Add Experience</button>
-            <input type="text" placeholder='school' name='school' value={this.state.school} onChange={this.handleChange}/>
-            <input type="text" placeholder='score' name='score' value={this.state.score} onChange={this.handleChange}/>
-            <input type="text" placeholder='university' name='university' value={this.state.university} onChange={this.handleChange}/>
-            <input type="text" placeholder='standard' name='standard' value={this.state.standard} onChange={this.handleChange}/>
-            <button className='btn btn-primary btn-sm m-1' onClick={this.handleEducation}>Add Education</button>
-            <input type="text" placeholder='extratitle' name='extratitle' value={this.state.extratitle} onChange={this.handleChange}/>
-            <input type="text" placeholder='extratext' name='extratext' value={this.state.extratext} onChange={this.handleChange}/>
-            <button className='btn btn-primary btn-sm m-1' onClick={this.handleExtra}>Add Extra Details</button>
+            <Input names={['contact']} section='Contact' handleChange={this.handleChange} handleClick={this.handleClick}/>
+            <Input names={['company','duration','role','description']} section='Experience' handleChange={this.handleChange} handleClick={this.handleExperience} />
+            <Input names={['school','score','university','standard']} section='Education' handleChange={this.handleChange} handleClick={this.handleEducation} />
+            <Input names={['extratitle','extratext']} section='Extra Details' handleChange={this.handleChange} handleClick={this.handleExtra} />
           </div>
           <div className="col">
             <h5 className='text-capitalize text-muted'>{this.state.name} {this.state.surname}</h5>
-            {this.state.details.map(data=>(
-              <div key={data} className='d-inline'>
+            {this.state.details.map((data,index)=>(
+              <div key={index} className='d-inline'>
                 <p className='d-inline p-1 bg-light  text-danger'>{data}</p>
                 <button className='btn btn-sm btn-danger p-1 rounded-0 d-inline' onClick={()=>this.handleDelete(data)}>X</button>
               </div>
