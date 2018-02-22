@@ -6,10 +6,14 @@ class Input extends React.Component{
       <React.Fragment>
         {
           this.props.names.map(
-            data => <input key={data} type="text" placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
+            data => {
+              if(data === 'description' || data === 'extratext')
+                return <input className='d-inline text-capitalize' style={{width:'55%'}} key={data} type='text' placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
+              return <input className='d-inline text-capitalize' key={data} type="text" placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
+            }
           )
         }
-        <button className='btn btn-primary btn-sm m-1' onClick={this.props.handleClick}>Add {this.props.section}</button>
+        <button className='btn btn-outline-dark btn-sm my-2 d-block rounded-0' onClick={this.props.handleClick}>Add {this.props.section}</button>
       </React.Fragment>
     )
   }
