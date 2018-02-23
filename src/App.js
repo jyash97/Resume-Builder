@@ -19,6 +19,7 @@ class App extends React.Component {
       school:'',
       university:'',
       standard:'',
+      modal:false,
       score:'',
       extratitle:'',
       extratext:'',
@@ -32,20 +33,19 @@ class App extends React.Component {
     this.handleEducation=this.handleEducation.bind(this);
     this.handleClick=this.handleClick.bind(this);
     this.handleExtra=this.handleExtra.bind(this);
-    this.handleGeneralDelete = this.handleGeneralDelete.bind(this);
-  }
-
-  handleDelete(data){
-    const a = this.state.details.filter(d => d!==data);
-    this.setState({
-      details:a
-    })
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   handleChange(event){
     this.setState({
       [event.target.name]:event.target.value
     })
+  }
+
+  toggleModal(){
+    this.setState(prevState => ({
+      modal: !prevState.modal
+    }));
   }
 
   handleExperience(){
@@ -95,8 +95,12 @@ class App extends React.Component {
   }
 
   handleClick(){
+    const obj = {
+      id:uniqueId(),
+      contact:this.state.contact
+    };
     this.setState({
-      details:[this.state.contact,...this.state.details]
+      details:[obj,...this.state.details]
     });
   }
 
@@ -115,7 +119,8 @@ class App extends React.Component {
             <Input names={['extratitle','extratext']} section='Extra Details' handleChange={this.handleChange} handleClick={this.handleExtra} />
           </div>
         </div>
-        <Preview handleGeneralDelete={this.handleGeneralDelete} education={this.state.education} />
+        <button className='btn btn-success rounded-0' onClick={this.toggleModal}>Preview and Edit</button>
+        <Preview handleGeneralDelete={this.handleGeneralDelete} modal={this.state.modal} toggleModal={this.toggleModal} name={this.state.name} surname={this.state.surname} details={this.state.details} extradetails={this.state.extradetails} experience={this.state.experience} education={this.state.education} />
       </div>
     );
   }
