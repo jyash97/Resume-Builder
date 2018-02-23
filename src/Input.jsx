@@ -9,6 +9,8 @@ class Input extends React.Component{
             data => {
               if(data === 'description' || data === 'extratext')
                 return <input className='d-inline text-capitalize' style={{width:'55%'}} key={data} type='text' placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
+              else if(data.toLowerCase() === 'contact')
+                return <input className='d-inline' key={data} type="text" placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
               return <input className='d-inline text-capitalize' key={data} type="text" placeholder={data} name={data} value={this.props[data]} onChange={this.props.handleChange}/>
             }
           )

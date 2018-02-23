@@ -1,5 +1,6 @@
 import React from 'react';
 import {uniqueId} from 'lodash';
+import {Link} from 'react-router-dom';
 
 import Input from './Input' ;
 import Preview from './Preview';
@@ -33,6 +34,8 @@ class App extends React.Component {
     this.handleEducation=this.handleEducation.bind(this);
     this.handleClick=this.handleClick.bind(this);
     this.handleExtra=this.handleExtra.bind(this);
+    this.handleGeneralDelete=this.handleGeneralDelete.bind(this);
+    this.handleStorage=this.handleStorage.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
   }
 
@@ -49,12 +52,13 @@ class App extends React.Component {
   }
 
   handleExperience(){
+    const description = this.state.description.split(',');
     const obj = {
       id:uniqueId(),
       name:this.state.company,
       role:this.state.role,
       duration:this.state.duration,
-      description:this.state.description
+      description
     };
     this.setState({
       experience:[obj,...this.state.experience]
@@ -104,9 +108,32 @@ class App extends React.Component {
     });
   }
 
+  handleStorage(){
+    const resumeData = JSON.stringify(this.state);
+    localStorage.setItem('resumedata',resumeData);
+    console.log(resumeData);
+  }
+
+  // React LifeCycles Method for Saving and Loading State using Local Storage
+
+  componentDidMount(){
+    const data = JSON.parse(localStorage.getItem('resumedata'));
+    this.setState({
+      education:data.education,
+      name:data.name,
+      surname:data.surname,
+      experience:data.experience,
+      details:data.details,
+      extradetails:data.extradetails
+    })
+  }
+
   render() {
     return (
       <div className='container py-4'>
+        <div className="alert alert-warning rounded-0" role="alert">
+          Your Saved Data will be loaded automatically, Check Preview and Edit to see the Saved Data.
+        </div>
         <div className='row'>
           <div className="col">
             <div className='name'>
@@ -119,7 +146,9 @@ class App extends React.Component {
             <Input names={['extratitle','extratext']} section='Extra Details' handleChange={this.handleChange} handleClick={this.handleExtra} />
           </div>
         </div>
-        <button className='btn btn-success rounded-0' onClick={this.toggleModal}>Preview and Edit</button>
+        <button className='btn btn-outline-danger text-capitalize rounded-0' onClick={this.toggleModal}>Preview and Edit</button>
+        <button className='btn btn-outline-info text-capitalize mx-4 rounded-0' onClick={this.handleStorage}>Save Data</button>
+        <Link to='/resume' className='btn btn-outline-success text-capitalize rounded-0'>Next</Link>
         <Preview handleGeneralDelete={this.handleGeneralDelete} modal={this.state.modal} toggleModal={this.toggleModal} name={this.state.name} surname={this.state.surname} details={this.state.details} extradetails={this.state.extradetails} experience={this.state.experience} education={this.state.education} />
       </div>
     );

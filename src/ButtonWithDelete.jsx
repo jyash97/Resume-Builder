@@ -4,7 +4,7 @@ class ButtonWithDelete extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <h5 className='text-primary text-capitalize'>{this.props.title.toLowerCase() === 'details' ? ('Contact'):this.props.title}</h5>
+        <h5 className='text-muted text-capitalize'>{this.props.title.toLowerCase() === 'details' ? ('Contact'):this.props.title}</h5>
         {
             this.props.data.map((arrayData,index)=>(
             <div key={index} className='d-inline mx-1'>

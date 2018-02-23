@@ -4,7 +4,7 @@ class Table extends React.Component{
   render(){
     return(
       <React.Fragment>
-        <h5 className='text-primary text-capitalize'>{this.props.title}</h5>
+        <h5 className='text-muted text-capitalize'>{this.props.title}</h5>
         <table className="table table-striped table-hover table-light">
           <thead className='thead-dark'>
             <tr>
@@ -29,7 +29,7 @@ class Table extends React.Component{
                           return <td key={name} className='text-capitalize'>
                             {
                               Array.isArray(this.props.data[index][name]) ? (
-                                <React.Fragment>{this.props.data[index][name].map((value,index) => <button className='btn btn-sm btn-primary mx-1 rounded-0' key={index}>{value}</button>)}</React.Fragment>
+                                <React.Fragment>{this.props.data[index][name].map((value,index) => <button className='btn btn-sm btn-primary mx-1 text-capitalize rounded-0' key={index}>{value}</button>)}</React.Fragment>
                               ):(
                                 this.props.data[index][name]
                               )
