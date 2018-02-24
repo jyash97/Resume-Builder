@@ -24,6 +24,7 @@ class App extends React.Component {
       score:'',
       extratitle:'',
       extratext:'',
+      forward:'invisible',
       extradetails:[],
       details:[],
       education:[],
@@ -53,11 +54,12 @@ class App extends React.Component {
 
   handleExperience(){
     const description = this.state.description.split(',');
+    const duration = this.state.duration.split(',');
     const obj = {
       id:uniqueId(),
       name:this.state.company,
       role:this.state.role,
-      duration:this.state.duration,
+      duration,
       description
     };
     this.setState({
@@ -66,10 +68,11 @@ class App extends React.Component {
   }
 
   handleEducation(){
+    const university = this.state.university.split(',');
     const obj = {
       id:uniqueId(),
       name:this.state.school,
-      university:this.state.university,
+      university,
       score:this.state.score,
       standard:this.state.standard
     };
@@ -111,6 +114,9 @@ class App extends React.Component {
   handleStorage(){
     const resumeData = JSON.stringify(this.state);
     localStorage.setItem('resumedata',resumeData);
+    this.setState({
+      forward:'visible'
+    })
   }
 
   // React LifeCycles Method for Saving and Loading State using Local Storage
@@ -124,7 +130,8 @@ class App extends React.Component {
         surname:data.surname,
         experience:data.experience,
         details:data.details,
-        extradetails:data.extradetails
+        extradetails:data.extradetails,
+        forward:'visible'
       })
     }
   }
@@ -149,7 +156,7 @@ class App extends React.Component {
         </div>
         <button className='btn btn-outline-danger text-capitalize rounded-0' onClick={this.toggleModal}>Preview and Edit</button>
         <button className='btn btn-outline-info text-capitalize mx-4 rounded-0' onClick={this.handleStorage}>Save Data</button>
-        <Link to='/resume' className='btn btn-outline-success text-capitalize rounded-0'>Next</Link>
+        <Link to='/resume' className={'btn btn-outline-success text-capitalize rounded-0 ' + this.state.forward}>Next</Link>
         <Preview handleGeneralDelete={this.handleGeneralDelete} modal={this.state.modal} toggleModal={this.toggleModal} name={this.state.name} surname={this.state.surname} details={this.state.details} extradetails={this.state.extradetails} experience={this.state.experience} education={this.state.education} />
       </div>
     );
