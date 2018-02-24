@@ -118,14 +118,16 @@ class App extends React.Component {
 
   componentDidMount(){
     const data = JSON.parse(localStorage.getItem('resumedata'));
-    this.setState({
-      education:data.education,
-      name:data.name,
-      surname:data.surname,
-      experience:data.experience,
-      details:data.details,
-      extradetails:data.extradetails
-    })
+    if(data !== null && data !== undefined){
+      this.setState({
+        education:data.education,
+        name:data.name,
+        surname:data.surname,
+        experience:data.experience,
+        details:data.details,
+        extradetails:data.extradetails
+      })
+    }
   }
 
   render() {
