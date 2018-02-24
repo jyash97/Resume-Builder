@@ -111,7 +111,6 @@ class App extends React.Component {
   handleStorage(){
     const resumeData = JSON.stringify(this.state);
     localStorage.setItem('resumedata',resumeData);
-    console.log(resumeData);
   }
 
   // React LifeCycles Method for Saving and Loading State using Local Storage
