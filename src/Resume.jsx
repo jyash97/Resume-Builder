@@ -18,6 +18,7 @@ class Resume extends React.Component{
               </div>
             ) : (
               <React.Fragment>
+                <button className='btn btn-block rounded-0 font-weight-bold  text-uppercase btn-sm btn-success' onClick={()=>{window.print()}}>Print Resume</button>
                 <Header name={data.name} surname={data.surname} details={data.details}/>
                 <Section title='education' entries={['name','university','standard','score']} data={data.education} />
                 <Section title='experience' entries={['name','duration','role','description']} data={data.experience} />

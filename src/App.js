@@ -63,7 +63,11 @@ class App extends React.Component {
       description
     };
     this.setState({
-      experience:[obj,...this.state.experience]
+      experience:[obj,...this.state.experience],
+      company:'',
+      role:'',
+      description:'',
+      duration:''
     });
   }
 
@@ -78,7 +82,11 @@ class App extends React.Component {
       standard:this.state.standard
     };
     this.setState({
-      education:[obj,...this.state.education]
+      education:[obj,...this.state.education],
+      score:'',
+      university:'',
+      standard:'',
+      school:''
     });
   }
 
@@ -91,14 +99,16 @@ class App extends React.Component {
   }
 
   handleExtra(){
-    const details = this.state.extratext.split(',')
+    const description = this.state.extratext.split(',')
     const obj={
       id:uniqueId(),
       title:this.state.extratitle,
-      description:details
+      description,
     }
     this.setState({
-      extradetails:[obj,...this.state.extradetails]
+      extradetails:[obj,...this.state.extradetails],
+      extratitle:'',
+      extratext:''
     })
   }
 
@@ -108,7 +118,8 @@ class App extends React.Component {
       contact:this.state.contact
     };
     this.setState({
-      details:[obj,...this.state.details]
+      details:[obj,...this.state.details],
+      contact:''
     });
   }
 
@@ -142,6 +153,7 @@ class App extends React.Component {
       <div className='container py-4'>
         <div className="alert alert-warning rounded-0" role="alert">
           Your Saved Data will be loaded automatically, Check Preview and Edit to see the Saved Data.
+          <span className="bg-light">If not getting how to use the app, Please see the <Link to='/instructions'>Instructions</Link>.</span>
         </div>
         <div className='row'>
           <div className="col">
@@ -149,15 +161,16 @@ class App extends React.Component {
               <input type="text" className='d-inline text-capitalize' placeholder='name' name='name' value={this.state.name} onChange={this.handleChange}/>
               <input type="text" className='d-inline text-capitalize' placeholder='surname' name='surname' value={this.state.surname} onChange={this.handleChange}/>
             </div>
-            <Input names={['contact']} section='Contact' handleChange={this.handleChange} handleClick={this.handleClick}/>
-            <Input names={['company','duration','role','description']} section='Experience' handleChange={this.handleChange} handleClick={this.handleExperience} />
-            <Input names={['school','score','university','standard']} section='Education' handleChange={this.handleChange} handleClick={this.handleEducation} />
-            <Input names={['extratitle','extratext']} section='Extra Details' handleChange={this.handleChange} handleClick={this.handleExtra} />
+            <Input names={['contact']} section='Contact' handleChange={this.handleChange} handleClick={this.handleClick} inputValues={this.state}/>
+            <Input names={['company','duration','role','description']} section='Experience' handleChange={this.handleChange} handleClick={this.handleExperience} inputValues={this.state}/>
+            <Input names={['school','score','university','standard']} section='Education' handleChange={this.handleChange} handleClick={this.handleEducation} inputValues={this.state} />
+            <Input names={['extratitle','extratext']} section='Extra Details' handleChange={this.handleChange} handleClick={this.handleExtra} inputValues={this.state}/>
           </div>
         </div>
         <button className='btn btn-outline-danger text-capitalize rounded-0' onClick={this.toggleModal}>Preview and Edit</button>
         <button className='btn btn-outline-info text-capitalize mx-4 rounded-0' onClick={this.handleStorage}>Save Data</button>
-        <Link to='/resume' className={'btn btn-outline-success text-capitalize rounded-0 ' + this.state.forward}>Next</Link>
+        <button className='btn btn-outline-info text-capitalize rounded-0' onClick={()=>{localStorage.clear()}}>Clear Saved Data</button>
+        <Link to='/resume' className={'btn btn-outline-success text-capitalize mx-4 rounded-0 ' + this.state.forward}>Next</Link>
         <Preview handleGeneralDelete={this.handleGeneralDelete} modal={this.state.modal} toggleModal={this.toggleModal} name={this.state.name} surname={this.state.surname} details={this.state.details} extradetails={this.state.extradetails} experience={this.state.experience} education={this.state.education} />
       </div>
     );
