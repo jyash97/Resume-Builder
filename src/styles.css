@@ -23,3 +23,7 @@ input:focus{
   width: 40%;
   margin: 5px;
 }
+
+div{
+  overflow: hidden;
+}

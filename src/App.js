@@ -69,11 +69,12 @@ class App extends React.Component {
 
   handleEducation(){
     const university = this.state.university.split(',');
+    const score = this.state.score.split(',');
     const obj = {
       id:uniqueId(),
       name:this.state.school,
       university,
-      score:this.state.score,
+      score,
       standard:this.state.standard
     };
     this.setState({

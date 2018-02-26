@@ -2,6 +2,8 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 
 import Header from './Header';
+import Section from './Section';
+import Buttons from './Buttons';
 
 class Resume extends React.Component{
   render(){
@@ -17,6 +19,20 @@ class Resume extends React.Component{
             ) : (
               <React.Fragment>
                 <Header name={data.name} surname={data.surname} details={data.details}/>
+                <Section title='education' entries={['name','university','standard','score']} data={data.education} />
+                <Section title='experience' entries={['name','duration','role','description']} data={data.experience} />
+                {
+                data.extradetails.map(
+                  (name,index) => (
+                      <div className="text-dark text-capitalize text-left p-2" key={index} >
+                        <h3 className="text-dark text-capitalize border-primary text-left d-inline-block p-1 my-1 font-weight-normal" style={{borderBottom:'4px solid'}}>{name['title']}</h3>
+                        <div className='my-2 p-1'>
+                          <Buttons data={name['description']} />
+                        </div>
+                      </div>
+                  )
+                )
+                }
               </React.Fragment>
             )
         }
