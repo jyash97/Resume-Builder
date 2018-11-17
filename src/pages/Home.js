@@ -2,14 +2,14 @@ import React from 'react';
 import { css } from 'emotion';
 
 import { Button } from '../components';
-import getStyles from '../components/theme';
+import { getColor } from '../components/theme';
 
 const headerStyles = css`
 	overflow: hidden;
 	background-image: linear-gradient(
 			to right,
-			${getStyles('primary', '99')},
-			${getStyles('primary', '4d')}
+			${getColor('primary', '99')},
+			${getColor('primary', '4d')}
 		),
 		url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c1b566f6cf95b8fe438961fd065158cd&auto=format&fit=crop&w=1950&q=80');
 	background-position: center;
@@ -29,7 +29,7 @@ const footerStyles = css`
 
 const titleStyles = css`
 	font-weight: 300;
-	color: ${getStyles('white')};
+	color: ${getColor('white')};
 	font-size: 32px;
 	margin: 20px auto;
 	span {
@@ -40,10 +40,10 @@ const titleStyles = css`
 const noteStyles = css`
 	text-align: center;
 	font-weight: 300;
-	color: ${getStyles('text')};
+	color: ${getColor('text')};
 	span {
 		font-weight: 400;
-		color: ${getStyles('title')};
+		color: ${getColor('title')};
 	}
 `;
 

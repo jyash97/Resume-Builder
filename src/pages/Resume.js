@@ -1,28 +1,45 @@
 import React, { useState } from 'react';
 
-import { Input } from '../components';
+import { Header } from '../components';
 
 const Resume = () => {
 	// State is now Present in value Object
 	const [data, setData] = useState({
-		title: 'First Name',
-		surname: 'Surname',
+		name: {
+			placeholder: 'Enter Name',
+			value: 'John Doe',
+			type: 'title',
+			name: 'name',
+		},
+		role: {
+			placeholder: 'Enter Role',
+			value: 'Javascript Engineer. UI/UX Designer.',
+			type: 'text',
+			name: 'role',
+		},
+		email: {
+			placeholder: 'Enter Email',
+			value: 'johndoe@gmail.com',
+			type: 'text',
+			name: 'email',
+		},
+		phone: {
+			placeholder: 'Enter Phone',
+			value: '+91 - 9654234112',
+			type: 'text',
+			name: 'phone',
+		},
+		link: {
+			placeholder: 'Enter link',
+			value: 'github.com/jyash97',
+			type: 'text',
+			name: 'link',
+		},
 	});
 
 	return (
 		<>
-			<Input
-				name="title"
-				value={data.title}
-				onChange={e => setData({ ...data, [e.target.name]: e.target.value })}
-				placeholder="Enter Name"
-			/>
-			<Input
-				name="surname"
-				value={data.surname}
-				onChange={e => setData({ ...data, [e.target.name]: e.target.value })}
-				placeholder="Enter Name"
-			/>
+			<Header setData={setData} inputNames={Object.keys(data)} data={data} />
 		</>
 	);
 };

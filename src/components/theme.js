@@ -4,6 +4,10 @@ const theme = {
 	white: '#FFFFFF',
 	titleColor: '#040F0F',
 	textColor: '#3F4045',
+	titleSize: '20px',
+	textSize: '14px',
+	titleWeight: '600',
+	textWeight: '400',
 };
 
 const getColor = (type = '', alpha) => {
@@ -21,4 +25,22 @@ const getColor = (type = '', alpha) => {
 	}
 };
 
-export default getColor;
+const getFontSize = (type: '') => {
+	switch (type) {
+		case 'title':
+			return theme.titleSize;
+		default:
+			return theme.textSize;
+	}
+};
+
+const getFontWeight = (type: '') => {
+	switch (type) {
+		case 'title':
+			return theme.titleWeight;
+		default:
+			return theme.textWeight;
+	}
+};
+
+export { getColor, getFontSize, getFontWeight };
