@@ -1,30 +1,53 @@
 import React from 'react';
 import { css } from 'emotion';
 
+import getStyles from './theme';
+
 const buttonStyles = type => {
-	if (type === 'secondary') {
-		return css`
-			position: relative;
-			outline: none;
-			border: 0;
-			top: 0;
-			background: white;
-			color: #4e54c8;
-			padding: 10px 20px;
-			font-size: 14px;
-			border-radius: 20px;
-			cursor: pointer;
-			transition: all ease 0.2s;
-			box-shadow: 0 2px 5px rgba(78, 84, 200, 0.2);
-			:hover {
-				top: -2px;
-				box-shadow: 0 6px 5px 1px rgba(78, 84, 200, 0.4);
-			}
-			:focus {
-				background: rgba(255, 255, 255, 0.8);
-			}
-		`;
+	let backgroundColor = '';
+	let color = type;
+	let shadow = type;
+
+	switch (type) {
+		case 'primary': {
+			backgroundColor = type;
+			color = 'white';
+			break;
+		}
+		case 'danger': {
+			backgroundColor = type;
+			color = 'white';
+			break;
+		}
+		default: {
+			backgroundColor = 'white';
+			color = 'primary';
+			shadow = 'primary';
+		}
 	}
+
+	return css`
+		position: relative;
+		outline: none;
+		border: 1px solid ${getStyles(color)};
+		top: 0;
+		background: ${getStyles(backgroundColor)};
+		color: ${getStyles(color)};
+		padding: 10px 20px;
+		font-size: 14px;
+		border-radius: 20px;
+		margin: 5px 10px;
+		cursor: pointer;
+		box-shadow: 0 2px 5px ${getStyles(shadow, '33')};
+		transition: all ease 0.2s;
+		:hover {
+			top: -2px;
+			box-shadow: 0 4px 5px ${getStyles(shadow, '66')};
+		}
+		:focus {
+			background: ${getStyles(shadow, 'cc')};
+		}
+	`;
 };
 
 const Button = ({ type, text, onClick }) => (
