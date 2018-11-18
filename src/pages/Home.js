@@ -1,5 +1,6 @@
 import React from 'react';
 import { css } from 'emotion';
+import { GitHub, AlertCircle } from 'react-feather';
 
 import { Button } from '../components';
 import { getColor } from '../components/theme';
@@ -59,11 +60,13 @@ const Home = ({ history }) => (
 			<Button
 				text="See Github"
 				type="primary"
+				icon={<GitHub size={15} />}
 				onClick={() => window.open('https://github.com/jyash97/resume-builder', '_blank')}
 			/>
 			<Button
 				text="Report Issues"
 				type="danger"
+				icon={<AlertCircle size={15} />}
 				onClick={() =>
 					window.open('https://github.com/jyash97/resume-builder/issues', '_blank')
 				}

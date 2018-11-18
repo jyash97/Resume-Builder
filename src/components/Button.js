@@ -34,6 +34,7 @@ const buttonStyles = type => {
 		background: ${getColor(backgroundColor)};
 		color: ${getColor(color)};
 		padding: 10px 20px;
+		vertical-align: middle;
 		font-size: 14px;
 		border-radius: 20px;
 		margin: 5px 10px;
@@ -45,15 +46,42 @@ const buttonStyles = type => {
 			box-shadow: 0 4px 5px ${getColor(shadow, '66')};
 		}
 		:focus {
-			background: ${getColor(shadow, 'cc')};
+			background: ${getColor(backgroundColor, 'cc')};
+		}
+		span {
+			margin-left: 8px;
+			vertical-align: middle;
 		}
 	`;
 };
 
-const Button = ({ type, text, onClick }) => (
-	<button type="button" onClick={onClick} className={buttonStyles(type)}>
-		{text}
-	</button>
-);
+const iconStyles = css`
+	color: #d4d5d8;
+	padding: 4px;
+	background: #fafaff;
+	vertical-align: middle;
+	outline: none;
+	border: 0;
+	cursor: pointer;
+	transition: all ease 0.1s;
+	border-radius: 3px;
+	margin: 2px 5px;
+	:hover {
+		background: #f4faff;
+		color: ${getColor('text')};
+	}
+`;
+
+const Button = ({ type, text, onClick, icon }) =>
+	text ? (
+		<button type="button" onClick={onClick} className={buttonStyles(type)}>
+			{text}
+			<span>{icon && icon}</span>
+		</button>
+	) : (
+		<button type="button" onClick={onClick} className={iconStyles}>
+			{icon}
+		</button>
+	);
 
 export default Button;

@@ -8,52 +8,42 @@ const headerStyles = css`
 	flex-direction: row;
 	padding: 20px;
 	justify-content: space-between;
-	div {
-		flex-direction: column;
-		display: flex;
-	}
 `;
 
-const Header = ({ data, inputNames, setData }) => {
-	function setInputValue(e) {
+const Header = ({ data, setData }) => {
+	function setInputValue(e, key) {
 		const inputState = data;
 		const {
 			target: { name, value },
 		} = e;
-		inputState[name].value = value;
+		inputState[key][name].value = value;
 		setData(inputState);
 	}
-	const profileInput = inputNames.filter(input => input === 'name' || input === 'role');
-	const contactInputs = inputNames.filter(input => input !== 'name' && input !== 'role');
+	const profileInput = data.title;
+	const contactInputs = data.contacts;
 	return (
 		<div className={headerStyles}>
 			<div>
-				{profileInput.map(input => (
+				{Object.keys(profileInput).map(input => (
 					<Input
-						key={data[input].name}
-						name={data[input].name}
-						type={data[input].type}
-						value={data[input].value}
-						onChange={e => setInputValue(e)}
-						placeholder={data[input].placeholder}
+						key={profileInput[input].name}
+						name={profileInput[input].name}
+						type={profileInput[input].type}
+						value={profileInput[input].value}
+						onChange={e => setInputValue(e, 'title')}
+						placeholder={profileInput[input].placeholder}
 					/>
 				))}
 			</div>
-			<div
-				className={css`
-					input {
-						text-align: right;
-					}
-				`}
-			>
-				{contactInputs.map(input => (
+			<div>
+				{Object.keys(contactInputs).map(input => (
 					<Input
-						key={data[input].name}
-						name={data[input].name}
-						type={data[input].type}
-						value={data[input].value}
-						onChange={e => setInputValue(e)}
-						placeholder={data[input].placeholder}
+						key={contactInputs[input].name}
+						name={contactInputs[input].name}
+						type={contactInputs[input].type}
+						value={contactInputs[input].value}
+						onChange={e => setInputValue(e, 'contacts')}
+						placeholder={contactInputs[input].placeholder}
 					/>
 				))}
 			</div>

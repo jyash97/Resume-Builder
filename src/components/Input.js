@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Plus, MoreVertical } from 'react-feather';
 import { css } from 'emotion';
+import Button from './Button';
 
 import { getColor, getFontSize, getFontWeight } from './theme';
 
@@ -20,14 +22,45 @@ const inputStyles = type => css`
 	}
 `;
 
-const Input = ({ value, placeholder, name, onChange, type }) => (
-	<input
-		onChange={onChange}
-		name={name}
-		className={inputStyles(type)}
-		placeholder={placeholder}
-		value={value}
-	/>
-);
+const inputContainer = css`
+	display: flex;
+	align-items: center;
+`;
+
+const inputOptionStyles = isIconVisible => css`
+	opacity: ${Number(isIconVisible)};
+	transition: opacity 0.2s ease;
+`;
+
+const Input = ({ value, placeholder, name, onChange, type }) => {
+	const [showIcon, setIconVisibility] = useState(false);
+	return (
+		<div
+			className={inputContainer}
+			onMouseEnter={() => setIconVisibility(true)}
+			onMouseLeave={() => setIconVisibility(false)}
+		>
+			<input
+				onChange={onChange}
+				name={name}
+				className={inputStyles(type)}
+				placeholder={placeholder}
+				value={value}
+			/>
+			<div className={inputOptionStyles(showIcon)}>
+				<Button
+					icon={<Plus size={16} />}
+					type="secondary"
+					onClick={() => console.log('works')}
+				/>
+				<Button
+					icon={<MoreVertical size={16} />}
+					type="secondary"
+					onClick={() => console.log('works')}
+				/>
+			</div>
+		</div>
+	);
+};
 
 export default Input;
