@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { css } from 'emotion';
 
 import Input from './Input';
+import { InputData } from '../pages/Resume';
 
 const headerStyles = css`
 	display: flex;
@@ -10,17 +11,10 @@ const headerStyles = css`
 	justify-content: space-between;
 `;
 
-const Header = ({ data, setData }) => {
-	function setInputValue(e, key) {
-		const inputState = data;
-		const {
-			target: { name, value },
-		} = e;
-		inputState[key][name].value = value;
-		setData(inputState);
-	}
+const Header = () => {
+	const { data } = useContext(InputData);
 	const profileInput = data.title;
-	const contactInputs = data.contacts;
+	const contactInputs = data.contact;
 	return (
 		<div className={headerStyles}>
 			<div>
@@ -30,7 +24,7 @@ const Header = ({ data, setData }) => {
 						name={profileInput[input].name}
 						type={profileInput[input].type}
 						value={profileInput[input].value}
-						onChange={e => setInputValue(e, 'title')}
+						field="title"
 						placeholder={profileInput[input].placeholder}
 					/>
 				))}
@@ -42,7 +36,7 @@ const Header = ({ data, setData }) => {
 						name={contactInputs[input].name}
 						type={contactInputs[input].type}
 						value={contactInputs[input].value}
-						onChange={e => setInputValue(e, 'contacts')}
+						field="contact"
 						placeholder={contactInputs[input].placeholder}
 					/>
 				))}

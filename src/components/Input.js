@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Plus, MoreVertical } from 'react-feather';
 import { css } from 'emotion';
+
+import { InputData } from '../pages/Resume';
 import Button from './Button';
 
 import { getColor, getFontSize, getFontWeight } from './theme';
@@ -32,8 +34,10 @@ const inputOptionStyles = isIconVisible => css`
 	transition: opacity 0.2s ease;
 `;
 
-const Input = ({ value, placeholder, name, onChange, type }) => {
+const Input = ({ value, placeholder, name, type, field }) => {
 	const [showIcon, setIconVisibility] = useState(false);
+
+	const { setInputValue } = useContext(InputData);
 	return (
 		<div
 			className={inputContainer}
@@ -41,7 +45,7 @@ const Input = ({ value, placeholder, name, onChange, type }) => {
 			onMouseLeave={() => setIconVisibility(false)}
 		>
 			<input
-				onChange={onChange}
+				onChange={e => setInputValue(e, field)}
 				name={name}
 				className={inputStyles(type)}
 				placeholder={placeholder}

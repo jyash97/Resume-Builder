@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Header } from '../components';
 
+export const InputData = React.createContext({});
+
 const Resume = () => {
 	// State is now Present in value Object
 	const [data, setData] = useState({
@@ -19,7 +21,7 @@ const Resume = () => {
 				name: 'role',
 			},
 		},
-		contacts: {
+		contact: {
 			email: {
 				placeholder: 'Enter Email',
 				value: 'johndoe@gmail.com',
@@ -41,10 +43,29 @@ const Resume = () => {
 		},
 	});
 
+	function setInputValue(e, field) {
+		const inputState = data;
+		const {
+			target: { name, value },
+		} = e;
+		inputState[field][name].value = value;
+		setData(inputState);
+	}
+
+	function addInput(name, key) {
+		console.log(name, key);
+	}
+
+	const contextValue = {
+		setInputValue,
+		addInput,
+		data,
+	};
+
 	return (
-		<>
-			<Header setData={setData} data={data} />
-		</>
+		<InputData.Provider value={contextValue}>
+			<Header />
+		</InputData.Provider>
 	);
 };
 
