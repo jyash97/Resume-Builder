@@ -15,8 +15,6 @@ injectGlobal`
     }
 `;
 
-console.log(process.env.check);
-
 // Enabling Concurrent Mode
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
 
