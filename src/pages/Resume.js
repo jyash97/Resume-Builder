@@ -65,8 +65,26 @@ const Resume = () => {
 		setData(inputState);
 	}
 
-	function addInput(name, key) {
-		console.log(name, key);
+	function addInput({ field, entry }) {
+		const fieldData = data[field];
+		const entriesToChange = Object.keys(fieldData)
+			.sort((prevItem, newItem) => fieldData[prevItem].index - fieldData[newItem].index)
+			.filter(item => fieldData[item].index > fieldData[entry].index);
+
+		if (entriesToChange.length) {
+			entriesToChange.forEach(item => (fieldData[item].index += 1)); // eslint-disable-line
+		}
+		const newFieldEntry = {
+			[`entry-${fieldData[entry].index + 1}`]: {
+				name: `entry-${fieldData[entry].index + 1}`,
+				index: fieldData[entry].index + 1,
+				value: '',
+				type: 'text',
+				placeholder: 'Untitled',
+			},
+		};
+
+		setData({ ...data, [field]: { ...fieldData, ...newFieldEntry } });
 	}
 
 	const contextValue = {

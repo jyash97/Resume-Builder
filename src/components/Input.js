@@ -69,7 +69,7 @@ const targetSpecs = {
 
 const Input = ({ value, placeholder, name, type, field, ...props }) => {
 	const [showIcon, setIconVisibility] = useState(false);
-	const { setInputValue } = useContext(InputData);
+	const { setInputValue, addInput } = useContext(InputData);
 	const { isDragging, connectDragSource, connectDragPreview, connectDropTarget } = props;
 	return connectDropTarget(
 		connectDragPreview(
@@ -90,7 +90,7 @@ const Input = ({ value, placeholder, name, type, field, ...props }) => {
 					<Button
 						icon={<Plus size={16} />}
 						type="secondary"
-						onClick={() => console.log('works')}
+						onClick={() => addInput({ field, entry: name })}
 					/>
 					{connectDragSource(
 						<div style={{ display: 'inline' }}>
