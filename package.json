@@ -5,6 +5,8 @@
   "dependencies": {
     "emotion": "^9.2.12",
     "react": "^16.7.0-alpha.2",
+    "react-dnd": "^6.0.0",
+    "react-dnd-html5-backend": "^6.0.0",
     "react-dom": "^16.7.0-alpha.2",
     "react-feather": "^1.1.4",
     "react-router-dom": "^4.4.0-beta.6",

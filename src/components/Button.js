@@ -72,14 +72,14 @@ const iconStyles = css`
 	}
 `;
 
-const Button = ({ type, text, onClick, icon }) =>
+const Button = ({ type, text, onClick, icon, ...rest }) =>
 	text ? (
-		<button type="button" onClick={onClick} className={buttonStyles(type)}>
+		<button type="button" onClick={onClick} className={buttonStyles(type)} {...rest}>
 			{text}
 			<span>{icon && icon}</span>
 		</button>
 	) : (
-		<button type="button" onClick={onClick} className={iconStyles}>
+		<button type="button" onClick={onClick} className={iconStyles} {...rest}>
 			{icon}
 		</button>
 	);

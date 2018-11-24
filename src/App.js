@@ -1,5 +1,7 @@
 import React from 'react';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
 
 import { Home, Resume } from './pages';
 
@@ -13,4 +15,4 @@ const App = () => (
 	</Router>
 );
 
-export default App;
+export default DragDropContext(HTML5Backend)(App);
